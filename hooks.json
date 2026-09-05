@@ -1,0 +1,19 @@
+{
+  "neural-seam": {
+    "enabled": true,
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "neural-seam hook session-start-once 1>&2",
+        "timeout": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "neural-seam hook stop 1>&2",
+        "timeout": 5
+      }
+    ]
+  }
+}

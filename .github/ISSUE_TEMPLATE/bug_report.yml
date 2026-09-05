@@ -1,0 +1,72 @@
+name: Bug report
+description: Something in this bundle does not work as documented
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Two quick checks first, because they are by far the most common causes:
+
+        1. Did you type the command **with** the plugin namespace (`/neural-seam:ns-status`, not
+           `/ns-status`)? The short form fails silently and the model still answers plausibly.
+        2. Does `neural-seam version` answer? If not, the binary is not on your `PATH`, and neither the
+           MCP server nor the hooks can run.
+
+        Issues here are public. Please do not paste tokens, private project identifiers, or source code
+        you cannot share. For a security vulnerability, use SECURITY.md instead, not this form.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you ran, what happened, and what you expected instead.
+      placeholder: |
+        I ran /neural-seam:ns-status in a connected project.
+        It answered ... , I expected ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of the two commands below, plus this bundle's version (the latest entry in CHANGELOG.md) and your OS.
+      render: shell
+      placeholder: |
+        agy --version
+        neural-seam version
+        bundle: 0.x.y
+        OS: Windows 11 / macOS 15 / Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest sequence that shows the problem.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part
+      options:
+        - A skill (/neural-seam:ns-*)
+        - The MCP server registration
+        - A lifecycle hook
+        - Installing or updating the bundle
+        - Documentation
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: Error text or CLI output. Redact anything private.
+      render: shell
+    validations:
+      required: false

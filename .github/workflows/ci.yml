@@ -1,0 +1,58 @@
+name: CI
+
+# This bundle is content only: nothing compiles and no suite executes it, so the first thing to
+# discover a broken file would otherwise be the Antigravity CLI, on a developer's machine, in silence.
+# These checks are the gate that stands in for that.
+#
+# What is deliberately NOT here: anything that needs the Antigravity CLI. `agy plugin validate`
+# needs the binary, and exercising a command needs a signed in CLI, which a public runner does not
+# have. Those checks are mandatory before tagging instead, and CONTRIBUTING.md ("Before a release")
+# is the procedure.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A newer push makes an in-flight run pointless. Cancel it rather than pay for it.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Bundle checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      # JSON, manifest and its $schema, frontmatter, invocation form, hook timeouts, hardcoded
+      # addresses, literal title lookups, re-derived product flow, credentials, links and anchors,
+      # encoding, required files.
+      - name: Static checks
+        run: node scripts/check-bundle.mjs
+
+      # The checks above scan the working tree. History is what a visitor can also read, and a
+      # credential removed by a later commit is still published. Only runs on pull requests, where
+      # there is a base to diff against.
+      #
+      # This scans for credentials only. Screening for references that belong to the repository this
+      # content is authored in happens there, before anything reaches here, on purpose: a public
+      # check that enumerates what it is hiding publishes it.
+      - name: Scan the commits in this pull request
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          pattern='(ghp|gho|ghs|ghu|ghr)_[A-Za-z0-9]{16,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|xox[baprs]-[A-Za-z0-9-]{10,}|BEGIN [A-Z ]*PRIVATE KEY'
+          if git diff "$BASE" "$HEAD" -- . | grep -nE "^\+.*($pattern)"; then
+            echo "::error::An added line looks like a credential. This repository is public."
+            exit 1
+          fi
+          echo "No credentials in the added lines."

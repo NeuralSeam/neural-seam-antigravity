@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/NeuralSeam/neural-seam-antigravity/security/advisories/new
+    about: Report privately. Please do not open a public issue for a security problem.
+  - name: Account, plan, project or billing question
+    url: https://app.neuralseam.cloud
+    about: Use the in-product support form. This repository is not an account support channel.
+  - name: Problem in the neural-seam runtime, backend or web app
+    url: https://app.neuralseam.cloud
+    about: Report it through the product, so it reaches the right component.
+  - name: Troubleshooting first
+    url: https://github.com/NeuralSeam/neural-seam-antigravity/blob/main/README.md#troubleshooting
+    about: Most reports are one of five known causes. Worth 60 seconds before opening an issue.

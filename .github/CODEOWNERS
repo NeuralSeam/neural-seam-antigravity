@@ -1,0 +1,10 @@
+# Every change to this bundle is reviewed by a maintainer.
+# See CONTRIBUTING.md for what belongs here and what does not.
+
+*   @caiopc
+
+# The wiring is kept in lockstep with the runtime's Antigravity host adapter.
+# A change to any of these files may require a matching runtime change first.
+/plugin.json        @caiopc
+/mcp_config.json    @caiopc
+/hooks.json         @caiopc

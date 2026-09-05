@@ -1,0 +1,48 @@
+name: Feature request
+description: Propose a change to this bundle
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This bundle is deliberately thin: it is the wiring between the Antigravity CLI and the
+        `neural-seam` runtime. Product logic lives in the runtime and the backend, so that it does not
+        have to be re-implemented for every host.
+
+        Requests that fit here are ones that are genuinely specific to this CLI. See CONTRIBUTING.md.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and where does it break down today? Describe the situation, not the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like
+      description: If you have a specific change in mind, describe it. If not, leave this empty.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: host-specific
+    attributes:
+      label: Is this specific to the Antigravity CLI?
+      description: If the same request would apply to any agent CLI, it probably belongs in the runtime rather than in this bundle.
+      options:
+        - Yes, it is about this CLI's behaviour, invocation form, hooks or permissions
+        - No, it would apply to any host
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: If this rests on how the CLI behaves, say how you know, and on which `agy` version. Measured facts move much faster here than expected ones.
+    validations:
+      required: false

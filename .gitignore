@@ -1,0 +1,6 @@
+# Local tooling workspaces and editor/OS noise. Nothing in this repository is
+# generated or built, so there is nothing else to ignore.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,4 @@
+{
+  "name": "neural-seam",
+  "description": "Neural Seam host adapter for the Antigravity CLI: registers the neural-seam-runtime MCP server, the /neural-seam:ns-* skills for getting set up and for the day to day work loop, a project rule, and the lifecycle hooks. An explicit extension - it does not imitate the CLI, does not bundle the neural-seam binary, and does not replace `neural-seam login` or `connect`. Requires the `neural-seam` binary on PATH and a connected project."
+}
