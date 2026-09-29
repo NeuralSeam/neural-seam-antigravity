@@ -10,6 +10,34 @@ Notable changes to the Neural Seam bundle for the Antigravity CLI. Format based 
 To update an installed bundle: `agy plugin uninstall neural-seam`, then install again from the
 repository URL.
 
+## [0.6.0] - 2026-09-29
+
+`/neural-seam:ns-start` now binds the project, and the rule points frontend work at the project's
+design system.
+
+### Added
+
+- **Design system reminder in the rule.** `rules/neural-seam.md` asks the agent to call
+  `get_design_system` on the `neural-seam-runtime` server before writing frontend code, and to follow
+  what it returns. The rule carries no design data: the design always comes from the tool. This host
+  has no event that sees both the file being edited and a channel into the session, so an instruction
+  that always loads is the coverage available here.
+
+### Fixed
+
+- **`ns-start` binds an unbound directory itself.** It used to name the next command and stop, so the
+  start flow could end with the directory still unbound. It now takes the guided path the runtime
+  returns, or runs `neural-seam connect <projectId>` after you confirm, and checks the state again
+  before moving on.
+- **`ns-start` follows a bind refusal to `/neural-seam:ns-clone`.** When the runtime refuses to bind
+  because the directory is not a clone of the project's repository, the refusal is shown as it came
+  and the flow continues with the clone, then asks you to reopen the session in the cloned folder.
+
+### Changed
+
+- **`ns-start` waits for your confirmation before binding.** This host has no setting that keeps a
+  skill away from the model's own initiative, so the confirmation is written into the skill itself.
+
 ## [0.5.0] - 2026-09-05
 
 ### Removed
