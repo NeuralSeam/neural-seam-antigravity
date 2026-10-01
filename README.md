@@ -123,7 +123,7 @@ Commands are invoked **with the plugin namespace**: `/neural-seam:ns-<name>`.
 | `/neural-seam:ns-connect [<id>]` | Project already exists: binds it to this folder. |
 | `/neural-seam:ns-clone <id>` | Clones the project's code only. Idempotent. |
 | `/neural-seam:ns-doctor` | Repairs the environment: sign in, language servers, MCP registration. |
-| `/neural-seam:ns-generate` | Bootstraps the backlog: generates the artefacts and creates the cards. |
+| `/neural-seam:ns-generate` | Bootstraps the backlog: generates the artefacts and creates the cards. Can also regenerate a backlog it generated before. |
 | `/neural-seam:ns-list [status] [kind]` | Lists cards, grouped by status. |
 | `/neural-seam:ns-open` | Shows the local dashboard link. |
 | `/neural-seam:ns-exec <id>` | Renders the implementation prompt for a card. |
