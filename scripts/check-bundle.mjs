@@ -181,6 +181,7 @@ const REGENERATE_TERMS = [
   ['explicit confirmation', "the developer's confirmation before the deleting call"],
   ['"generated"', 'the tag that keeps hand-made cards out of the selection'],
   ['"BACKLOG"', 'the status that keeps cards already picked up out of the selection'],
+  ['cascade: true', 'the opt-in a regenerate needs once the dry run refuses an EPIC with sub-activities'],
 ];
 {
   const file = join(root, 'skills', 'ns-generate', 'SKILL.md');
