@@ -10,6 +10,26 @@ Notable changes to the Neural Seam bundle for the Antigravity CLI. Format based 
 To update an installed bundle: `agy plugin uninstall neural-seam`, then install again from the
 repository URL.
 
+## [0.7.0] - 2026-10-01
+
+### Added
+
+- **`/neural-seam:ns-generate` can regenerate a backlog.** When a previous generation left cards tagged
+  `generated` that are still in `BACKLOG`, the skill lists them (title, id, board, status) and asks
+  whether to keep them or regenerate. Regenerating deletes exactly those cards, after a dry run and
+  your explicit confirmation, and then generates a new batch. Cards you created by hand, or already
+  picked up, are never touched. This needs a `neural-seam` runtime that provides the
+  `delete_activities` tool; on an older runtime the skill says so and generates as before.
+- **Regenerating a backlog that has EPICs asks before deleting their sub-activities.** The dry run
+  refuses an EPIC with sub-activities unless `cascade` is set, so the command now shows those
+  EPICs and their children and repeats the dry run with `cascade: true` only if you agree.
+
+### Changed
+
+- **`/neural-seam:ns-generate` no longer creates the cards one by one after saving.** The runtime's
+  `save_insumos` now creates the backlog cards itself, in one batch, so the skill stopped telling the
+  model to create each one again with `create_activity`.
+
 ## [0.6.0] - 2026-09-29
 
 `/neural-seam:ns-start` now binds the project, and the rule points frontend work at the project's

@@ -166,6 +166,34 @@ for (const dir of ['skills', 'rules']) {
 }
 
 // ---------------------------------------------------------------------------
+// 4b. The regenerate path of ns-generate keeps its guarantees.
+//
+// ns-generate can delete cards. Each term below is one guarantee of that path, and losing any of them
+// in an edit turns "regenerate" into a delete the developer never saw or never scoped: the dry run
+// that lists before anything is deleted, the token that binds the delete to that list, the
+// confirmation that only the developer can give, and the filter that keeps hand-made and started
+// cards out of reach. The tool is named with its server, as everywhere in this bundle.
+// ---------------------------------------------------------------------------
+const REGENERATE_TERMS = [
+  ['`delete_activities` tool of the `neural-seam-runtime`', 'the runtime tool that owns the dry run and the token, named with its server'],
+  ['dry_run', 'the dry run that lists the cards before anything is deleted'],
+  ['confirm_token', 'the token that binds the delete to the list the developer saw'],
+  ['explicit confirmation', "the developer's confirmation before the deleting call"],
+  ['"generated"', 'the tag that keeps hand-made cards out of the selection'],
+  ['"BACKLOG"', 'the status that keeps cards already picked up out of the selection'],
+  ['cascade: true', 'the opt-in a regenerate needs once the dry run refuses an EPIC with sub-activities'],
+];
+{
+  const file = join(root, 'skills', 'ns-generate', 'SKILL.md');
+  if (existsSync(file)) {
+    const body = read(file).replace(/\r?\n\s*/g, ' ');
+    for (const [term, why] of REGENERATE_TERMS) {
+      if (!body.includes(term)) fail(rel(file), `the regenerate path must name \`${term}\`: ${why}`);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 5. No credentials.
 //
 // Screening for references that belong only to the repository this content is authored in runs
