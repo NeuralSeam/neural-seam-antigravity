@@ -17,6 +17,15 @@ project bound to it (`.neural-seam/manifest.json` present).
 - The `neural-seam` binary on `PATH` is the only client. Do not invent another installation path, and
   do not try to sign in on the developer's behalf.
 
+## Frontend code follows the project's design system
+
+- Before writing frontend code (components, pages, styles, markup), call the `get_design_system` tool
+  of the `neural-seam-runtime` MCP server and follow the design it returns: the template, the colour
+  roles and the developer's instructions. Call it again when the session moves to other frontend work
+  rather than relying on an earlier answer.
+- When the response says the design system is not defined yet, or was left for later, keep to the
+  patterns already in the code and do not invent a visual direction of your own.
+
 ## Generation starts with the developer
 
 - Prompts handed back by a tool (artefacts, backlog, a card's implementation) are **presented** to the
