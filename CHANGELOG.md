@@ -10,6 +10,20 @@ Notable changes to the Neural Seam bundle for the Antigravity CLI. Format based 
 To update an installed bundle: `agy plugin uninstall neural-seam`, then install again from the
 repository URL.
 
+## [0.7.1] - 2026-10-20
+
+### Changed
+
+- **Binding a project happens in the terminal.** `/neural-seam:ns-connect` and `/neural-seam:ns-start` present the link
+  that `check_setup` returns, which opens the Neural Seam web app, where you find the project
+  identifier. Nothing is bound from the browser: the skill then runs `neural-seam connect <projectId>`,
+  which fetches the signed manifest, verifies it and binds the current directory.
+- **`/neural-seam:ns-create` says how a new project reaches this directory.** Creating it in the web app binds
+  nothing here; the web app shows the `neural-seam connect <projectId>` command to run in this
+  directory.
+- **`/neural-seam:ns-open` shows the dashboard of the Neural Seam web app.** The skill no longer describes a
+  dashboard served locally or a tray app.
+
 ## [0.7.0] - 2026-10-01
 
 ### Added

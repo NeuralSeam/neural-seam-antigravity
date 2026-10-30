@@ -13,10 +13,11 @@ the project for them: creating it is something the developer does in the browser
 1. Call the `check_setup` tool of the `neural-seam-runtime` MCP server.
 2. Present the `message` it returned and the setup URL from the response, **exactly as returned**.
    Never build the URL and never assume a port. Ask the developer to open it and create the project
-   there; creating it is what binds a project to this directory.
+   there. Creating it binds nothing here: the web app then shows the `neural-seam connect <projectId>`
+   command, which binds this directory when run in it.
 3. If the response says a project is already set up, or that one exists and only needs binding, say so
    and point at `/neural-seam:ns-status` - there is nothing to create.
-4. Close with the next step: **once it is created, run `/neural-seam:ns-status`**, then
+4. Close with the next step: **once it is created and bound, run `/neural-seam:ns-status`**, then
    `/neural-seam:ns-generate`.
 
 If `check_setup` returns an `error`, point at `/neural-seam:ns-doctor`.
